@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <audio id="background-audio" autoplay muted>
+        <source src="https://1ab3a3e5.testingalyssa.pages.dev/musik.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var audio = document.getElementById('background-audio');
+
+            // Mencoba memutar audio berulang kali jika gagal
+            function tryPlayAudio() {
+                audio.play().then(function() {
+                    // Menghapus atribut muted setelah berhasil diputar
+                    audio.muted = false;
+                }).catch(function(error) {
+                    console.log('Autoplay tidak diizinkan oleh browser:', error);
+                    setTimeout(tryPlayAudio, 1000); // Mencoba lagi setelah 1 detik
+                });
+            }
+
+            tryPlayAudio();
+        });
+    </script>
+</body>
+</html>
